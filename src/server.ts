@@ -6,6 +6,7 @@ import errorHandlers from "./middleware/errorHandlers";
 import routes from "./services";
 import "reflect-metadata";
 import { SQLiteDbManager } from "./db/sqlLite";
+import * as swaggerJSDocExpress from 'swagger-jsdoc-express';
 
 process.on("uncaughtException", e => {
   console.log(e);
@@ -26,6 +27,16 @@ SQLiteDbManager.connect();
 
 const { PORT = 3000 } = process.env;
 const server = http.createServer(router);
+
+
+// create a '/swagger' endpoint ...
+swaggerJSDocExpress.setupSwaggerUIFromSourceFiles(
+  {
+    cwd: '/src/services/search/',
+    files: ['**/*.ts', '**/*.js'],
+  },
+  router
+);
 
 server.listen(PORT, () =>
   console.log(`Server is running http://localhost:${PORT}...`)

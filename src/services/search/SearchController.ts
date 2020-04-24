@@ -2,6 +2,25 @@ import { getPlaces } from "./providers/OpenCageDataProvider";
 import { SampleModel } from "../../db/dbModels/sampleModels";
 import { SampleRepository } from "./providers/sampleRespository";
 
+/**
+ * @swagger
+ *
+ * /getPlacesbyName/{placeName}:
+ *   get:
+ *     description: Get Places by name
+ *     parameters:
+ *       - name: placeName
+ *         in: path
+ *         required: true
+ *         schema:
+ *          type: string
+ *     responses:
+ *       200:
+ *         description: Get Places by name
+ *       400:
+ *         description: Bad request
+ *     tags: [search]
+ */
 export const getPlacesByName = async (q: string) => {
   if (q.length < 3) {
     return {

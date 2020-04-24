@@ -1,38 +1,74 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0.0"
-  },
-  "host": "localhost:3000",
-  "basePath": "/api/v1",
-  "schemes": ["http"],
-  "produces": ["application/json"],
-  "paths": {
-    "/search": {
-      "get": {
-        "tags": ["Search Text"],
-        "summary": "Search by places using opencagedata service",
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "Bad request"
-          }
+    "openapi": "3.0.0",
+    "info": {
+        "title": "fleet hawks API's",
+        "description": "This is a sample server for a pet store.",
+        "termsOfService": "http://example.com/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.example.com/support",
+            "email": "support@example.com"
         },
-        "content": {
-          "application/json": {}
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
         },
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Specifies the query string",
-            "required": true,
-            "type": "string"
-          }
-        ]
-      }
-    }
-  }
+        "version": "1.0.0"
+    },
+    "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        {
+            "BearerAuth": []
+        }
+    ],
+    "servers": [
+        {
+            "url": "https://development.gigantic-server.com/v1",
+            "description": "Development server"
+        },
+        {
+            "url": "https://staging.gigantic-server.com/v1",
+            "description": "Staging server"
+        },
+        {
+            "url": "https://api.gigantic-server.com/v1",
+            "description": "Production server"
+        }
+    ],
+    "paths": {
+        "/getPlacesbyName/{placeName}": {
+            "get": {
+                "description": "Get Places by name",
+                "parameters": [
+                    {
+                        "name": "placeName",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Places by name"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                },
+                "tags": [
+                    "search"
+                ]
+            }
+        }
+    },
+    "tags": []
 }
