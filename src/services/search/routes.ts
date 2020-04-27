@@ -7,10 +7,10 @@ export default [
     path: "/api/v1/search",
     method: "get",
     handler: [
-      checkSearchParams,
+
       async ({ query }: Request, res: Response) => {
-        const result = await getPlacesByName(query.q);
-        res.status(200).send(result);
+        throw new Error("This is an error and it should be logged to the console");
+        res.status(200).send('hello');
       }
     ]
   }
